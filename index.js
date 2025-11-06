@@ -2,7 +2,8 @@ console.log("Mi primera app en express.js");
 require("dotenv").config();
 const express = require("express");
 const { corsMiddleware } = require("./shared/middleware/cors");
-const { testConnection } = require ("./config/database");
+const { testConnection } = require ("./Config/database");
+const { syncModels } = require("./shared/models");
 
 const app = express();
 const PORT = process.env.PORT || 3001;
@@ -13,6 +14,7 @@ app.use(corsMiddleware);
 //Inicializar base de datos
 const initializeDatabase = async () => {
     await testConnection();
+    await syncModels();
 };
 
 
